@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
   "http://localhost:3000", // Keep this for local development
-  "https://stirring-custard-bcc2bf.netlify.app", // Add your Netlify frontend
+  "https://grand-pasca-10dc38.netlify.app", // Add your Netlify frontend
 ];
 
 app.use(
