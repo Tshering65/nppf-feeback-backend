@@ -11,12 +11,24 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const allowedOrigins = [
+  "http://localhost:3000", // Keep this for local development
+  "https://679cce1dc258d011a9bb9411--celebrated-empanada-2b9edd.netlify.app", // Add your Netlify frontend
+];
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:3000", // Update this with your frontend domain
-    credentials: true,
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, // Allow credentials if using authentication
   })
 );
+
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
